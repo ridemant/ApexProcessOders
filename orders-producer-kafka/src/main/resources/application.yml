@@ -1,0 +1,27 @@
+server:
+  port: 7071
+  servlet:
+    context-path: /orders-producer-kafka
+
+spring:
+  application:
+    name: orders-producer-kafka
+  kafka:
+    bootstrap-servers: 62.84.178.185:9092  # IP de tu servidor Kafka
+    producer:
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
+    consumer:
+      bootstrap-servers: 62.84.178.185:9092  # IP de tu servidor Kafka
+      group-id: order-group                 # Grupo de consumidores
+      auto-offset-reset: earliest           # Leer mensajes desde el principio si no hay offset
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+
+    listener:
+      ack-mode: batch
+
+kafka:
+  topic:
+    name: orders

@@ -1,0 +1,37 @@
+server:
+  port: 7070
+  servlet:
+    context-path: /orders-consumer-kafka
+
+spring:
+  application:
+    name: orders-consumer-kafka
+
+  kafka:
+    consumer:
+      bootstrap-servers: 62.84.178.185:9092
+      group-id: order-group
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+    producer:
+      bootstrap-servers: 62.84.178.185:9092
+      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+    listener:
+      ack-mode: batch
+  data:
+    mongodb:
+      uri: mongodb://root:X7tM9nL4PqY6ZdB2@62.84.178.185:27017/apexglobal?authSource=admin&ssl=false
+
+# Logging
+logging:
+  level:
+    root: INFO                                # Nivel de logging predeterminado
+    org.springframework.kafka: DEBUG          # Logging para depurar Kafka
+    co.apexglobal.orderprocessingworker: DEBUG # Logging para tu proyecto
+
+external:
+  api:
+    url: http://localhost:8080
+

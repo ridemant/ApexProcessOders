@@ -1,0 +1,4 @@
+api:
+  customer-url: http://localhost:8080/customers/
+  product-url: http://localhost:8080/products/
+  order-url: http://localhost:8080/orders/
